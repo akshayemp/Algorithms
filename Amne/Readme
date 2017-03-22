@@ -1,0 +1,42 @@
+=======
+Readme
+=======
+
+How it works?
+
+The program has two files: 
+
+1) gen.py - A program that generates random input for the program.
+2) find_ranges.py - A program which finds the subranges within the house prices in a given window.
+
+
+++++++
+gen.py
+++++++
+
+gen.py is a random input file generator, the function _gen() takes in no values but has it's own
+constraints. It generates a random integer between 1, 200000 which is in accordance with value
+of N. Then in similar fashion the window size is generated with constraints 1 to N.
+
+The house price values are generates and stored in a list in string format and then appended with constraints to form a full input.txt file.
+
++++++++++++++++++
+find_subranges.py
++++++++++++++++++
+
+This is the main module for the assignment. It contains following functions:
+
+1) __init__() - This is the constructor of the class Amne.Calls the read_input() function and populate the class variables.
+
+2) read_input() - This function reads the input.txt file created either manually or by gen.py. Before we feed these values to work with, we need to perform some preprocessing and remove the trailing whitespaces and split the whole string with whitespaces. Once that is done we use this data to   
+find the subranges.
+
+3) write_output() - This function takes in the result list and stores each value of the list line by line in an output.
+
+4) find_subranges() - This function solves our problem using the data and constraints. We create three memoization tables - table, aux and result. The 'table' stores three values -1,0 and 1, each representing if the value has decreased, stayed the same or increased. The 'aux' memoization table
+stores same type of values as 'table' but keeps a value if 'table' contains two consequetively same values denoting that they are continuous. The 'result' stores the final result of the program.
+
+
+This program runs in O(n) time but with theta(N) space because of memoization, which is an improvement to the the program which takes O(klogN) time and O(1) space. We trade in space to improve the time complexity of the program. We create two variables 'adder' and 'extra' which keep on summing the values each time we see a value and remove them as we move our sliding window. This is much time efficient then summing over all the values at the end, because summing takes O(n) times and the algorithm would approximate to O(n^2) inadvertantly.
+
+
